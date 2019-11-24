@@ -10,11 +10,11 @@ import com.example.umangburman.databindingwithlivedata.Model.Product;
 public class ProductViewModel extends ViewModel {
 
     public MutableLiveData<String> strProductName = new MutableLiveData<>();
-    public MutableLiveData<String> ProductShortIntro = new MutableLiveData<>();
+    public MutableLiveData<String> strShortIntro = new MutableLiveData<>();
 
     private MutableLiveData<Product> userMutableLiveData;
 
-    public MutableLiveData<Product> getUser() {
+    public MutableLiveData<Product> getProduct() {
 
         if (userMutableLiveData == null) {
             userMutableLiveData = new MutableLiveData<>();
@@ -25,9 +25,9 @@ public class ProductViewModel extends ViewModel {
 
     public void onClick(View view) {
 
-        Product product  = new Product(EmailAddress.getValue(), Password.getValue());
+        Product product  = new Product(ProductName.getValue(), ShortIntro.getValue());
 
-        userMutableLiveData.setValue(loginUser);
+        userMutableLiveData.setValue(product);
 
     }
 
