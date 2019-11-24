@@ -1,28 +1,28 @@
 package com.example.umangburman.databindingwithlivedata.Model;
 
 public class Product {
-    private String strstrProductName;
-    private String productShortIntro;
+    private String strProductName;
+    private String strShortIntro;
 
     public Product(String strProductName,String shortintro){
         strProductName = strProductName;
-        productShortIntro = shortintro;
+        strShortIntro = shortintro;
     }
 
     public String getstrProductName() {
         return strProductName;
     }
 
-    public String getProductShortIntro() {
-        return productShortIntro;
+    public String getstrShortIntro() {
+        return strShortIntro;
     }
 
     public void setstrProductName(String strProductName) {
         this.strProductName = strProductName;
     }
 
-    public void setProductShortIntro(String productShortIntro) {
-        this.productShortIntro = productShortIntro;
+    public void setstrShortIntro(String strShortIntro) {
+        this.strShortIntro = strShortIntro;
     }
 
 }
