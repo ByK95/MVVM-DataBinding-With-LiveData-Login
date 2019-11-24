@@ -30,4 +30,8 @@ public class LoginUser {
         return getStrPassword().length() > 5;
     }
 
+    public boolean validate(){
+        return this.strEmailAddress == null && this.strPassword == null;
+    }
+
 }

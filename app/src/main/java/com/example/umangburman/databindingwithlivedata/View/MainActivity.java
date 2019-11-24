@@ -12,6 +12,8 @@ import com.example.umangburman.databindingwithlivedata.Model.LoginUser;
 import com.example.umangburman.databindingwithlivedata.R;
 import com.example.umangburman.databindingwithlivedata.ViewModel.LoginViewModel;
 import com.example.umangburman.databindingwithlivedata.databinding.ActivityMainBinding;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Objects;
 
@@ -21,11 +23,14 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         loginViewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
+        loginViewModel.initFirebase();
 
         binding = DataBindingUtil.setContentView(MainActivity.this, R.layout.activity_main);
 
