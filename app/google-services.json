@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "41342318061",
+    "firebase_url": "https://mvvm-databinding-with-li-c8598.firebaseio.com",
+    "project_id": "mvvm-databinding-with-li-c8598",
+    "storage_bucket": "mvvm-databinding-with-li-c8598.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:41342318061:android:c23fc176d7fbf788bb23e4",
+        "android_client_info": {
+          "package_name": "com.example.umangburman.databindingwithlivedata"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "41342318061-0m2kt5vk28811ht9tv1ooc5qnjdh2v9q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.umangburman.databindingwithlivedata",
+            "certificate_hash": "fa145d5b6c627e29ce8963a5a8510cb9532373c0"
+          }
+        },
+        {
+          "client_id": "41342318061-6oqf7dphjdfkbuj62mcaak80kgkf5cj5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8n_WuBbWKVs6rGD14sDyl7VWpNFs33bU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "41342318061-6oqf7dphjdfkbuj62mcaak80kgkf5cj5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

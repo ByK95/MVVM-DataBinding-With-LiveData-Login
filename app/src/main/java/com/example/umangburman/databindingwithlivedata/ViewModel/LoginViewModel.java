@@ -38,7 +38,7 @@ public class LoginViewModel extends ViewModel {
         userMutableLiveData.setValue(loginuser);
         boolean is_valid = !loginuser.validate();
         if (is_valid){
-            firebaseAuth.signInWithEmailAndPassword(loginuser.getStrEmailAddress(),loginuser.getStrPassword()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+            firebaseAuth.createUserWithEmailAndPassword(loginuser.getStrEmailAddress(),loginuser.getStrPassword()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                 @Override
                 public void onSuccess(AuthResult authResult) {
 
