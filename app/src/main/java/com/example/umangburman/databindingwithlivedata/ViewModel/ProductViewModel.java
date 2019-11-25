@@ -12,14 +12,14 @@ public class ProductViewModel extends ViewModel {
     public MutableLiveData<String> strProductName = new MutableLiveData<>();
     public MutableLiveData<String> strShortIntro = new MutableLiveData<>();
 
-    private MutableLiveData<Product> userMutableLiveData;
+    private MutableLiveData<Product> productMutableLiveData;
 
     public MutableLiveData<Product> getProduct() {
 
-        if (userMutableLiveData == null) {
-            userMutableLiveData = new MutableLiveData<>();
+        if (productMutableLiveData == null) {
+            productMutableLiveData = new MutableLiveData<>();
         }
-        return userMutableLiveData;
+        return productMutableLiveData;
 
     }
 
@@ -27,7 +27,7 @@ public class ProductViewModel extends ViewModel {
 
         Product product  = new Product(strProductName.getValue(),strShortIntro.getValue());
 
-        userMutableLiveData.setValue(product);
+        productMutableLiveData.setValue(product);
 
     }
 

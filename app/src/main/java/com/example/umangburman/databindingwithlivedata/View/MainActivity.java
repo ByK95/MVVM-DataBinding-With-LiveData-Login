@@ -13,8 +13,7 @@ import com.example.umangburman.databindingwithlivedata.Model.LoginUser;
 import com.example.umangburman.databindingwithlivedata.R;
 import com.example.umangburman.databindingwithlivedata.ViewModel.LoginViewModel;
 import com.example.umangburman.databindingwithlivedata.databinding.ActivityMainBinding;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.example.umangburman.databindingwithlivedata.View.ProductListActivity;
 
 import java.util.Objects;
 
@@ -63,8 +62,9 @@ public class MainActivity extends AppCompatActivity {
                     binding.lblEmailAnswer.setText(loginUser.getStrEmailAddress());
                     binding.lblPasswordAnswer.setText(loginUser.getStrPassword());
 
-                    Intent intent = new Intent(MainActivity.this,ProductListActivity.class);
-                    startActivity(intent);
+                    Intent ıntent = new Intent(MainActivity.this,ProductListActivity.class);
+                    startActivity(ıntent);
+
                 }
 
             }
