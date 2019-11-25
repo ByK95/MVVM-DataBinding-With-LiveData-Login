@@ -25,7 +25,7 @@ public class ProductViewModel extends ViewModel {
 
     public void onClick(View view) {
 
-        Product product  = new Product(ProductName.getValue(), ShortIntro.getValue());
+        Product product  = new Product(strProductName.getValue(),strShortIntro.getValue());
 
         userMutableLiveData.setValue(product);
 

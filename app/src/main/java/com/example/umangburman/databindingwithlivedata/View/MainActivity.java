@@ -2,6 +2,7 @@ package com.example.umangburman.databindingwithlivedata.View;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -61,6 +62,9 @@ public class MainActivity extends AppCompatActivity {
                 else {
                     binding.lblEmailAnswer.setText(loginUser.getStrEmailAddress());
                     binding.lblPasswordAnswer.setText(loginUser.getStrPassword());
+
+                    Intent intent = new Intent(MainActivity.this,ProductListActivity.class);
+                    startActivity(intent);
                 }
 
             }
