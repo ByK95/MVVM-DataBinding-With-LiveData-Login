@@ -1,12 +1,25 @@
 package com.example.umangburman.databindingwithlivedata.Model;
 
 public class Product {
+    private String strProductId;
     private String strProductName;
     private String strShortIntro;
 
-    public Product(String strProductName,String shortintro){
-        strProductName = strProductName;
-        strShortIntro = shortintro;
+    public Product() {
+    }
+
+    public Product(String strProductId, String strProductName, String strShortIntro) {
+        this.strProductId = strProductId;
+        this.strProductName = strProductName;
+        this.strShortIntro = strShortIntro;
+    }
+
+    public String getStrProductId() {
+        return strProductId;
+    }
+
+    public void setStrProductId(String strProductId) {
+        this.strProductId = strProductId;
     }
 
     public String getstrProductName() {

@@ -21,7 +21,7 @@ public class ProductListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         productViewModel = ViewModelProviders.of(this).get(ProductViewModel.class);
-
+        productViewModel.initFirebase();
         binding = DataBindingUtil.setContentView(ProductListActivity.this, R.layout.activity_product_list);
 
         binding.setLifecycleOwner(this);
