@@ -8,93 +8,111 @@
             name="ProductViewModel"
             type="com.example.umangburman.databindingwithlivedata.ViewModel.ProductViewModel" />
     </data>
-<android.support.constraint.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".View.ProductActivity">
 
-    <EditText
-        android:id="@+id/addName"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
-        android:ems="10"
-        android:gravity="center"
-        android:text="@={ProductViewModel.strProductName}"
-        android:hint="Product Name"
-        android:inputType="textPersonName"
-        android:paddingLeft="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/addIntro"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".View.ProductActivity">
 
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="26dp"
-        android:layout_marginBottom="15dp"
-        android:gravity="center"
-        android:text="Add Product"
-        android:textColor="@android:color/black"
-        android:textSize="30dp"
-        app:layout_constraintBottom_toTopOf="@+id/addName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <EditText
+            android:id="@+id/addName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="140dp"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="Product Name"
+            android:inputType="textPersonName"
+            android:orientation="vertical"
+            android:text="@={ProductViewModel.strProductName}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-    <EditText
-        android:id="@+id/addIntro"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="35dp"
-        android:text="@={ProductViewModel.strShortIntro}"
-        android:ems="10"
-        android:gravity="center"
-        android:hint="Short intro"
-        android:inputType="textPersonName"
-        android:paddingLeft="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addName" />
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:gravity="center"
+            android:text="Add Product"
+            android:textColor="@android:color/black"
+            android:textSize="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.514"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="171dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="131dp"
-        android:text="ADD product"
-        android:onClick="@{(v) -> ProductViewModel.onClick(v)}"
-        app:layout_constraintBottom_toTopOf="@+id/name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addIntro" />
+        <Button
+            android:id="@+id/button"
+            android:layout_width="171dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="44dp"
+            android:onClick="@{(v) -> ProductViewModel.onClick(v)}"
+            android:text="ADD product"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.508"
+            app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/name"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="84dp"
-        android:gravity="center"
-        android:text="Name"
-        app:layout_constraintBottom_toTopOf="@+id/intro"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="114dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="79dp"
+            android:layout_marginBottom="22dp"
+            android:clickable="true"
+            app:layout_constraintBottom_toTopOf="@+id/addName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@android:drawable/star_on" />
 
-    <TextView
-        android:id="@+id/intro"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="52dp"
-        android:gravity="center"
-        android:text="shortintro"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name" />
-</android.support.constraint.ConstraintLayout>
+        <EditText
+            android:id="@+id/addPrice"
+            android:layout_width="172dp"
+            android:layout_height="58dp"
+            android:layout_marginBottom="15dp"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="Price"
+            android:inputType="number"
+            android:text="@={ProductViewModel.price}"
+            android:textIsSelectable="false"
+            app:layout_constraintBottom_toTopOf="@+id/button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/addCategory"
+            android:layout_width="0dp"
+            android:layout_height="51dp"
+            android:layout_marginBottom="15dp"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="Category(Electronics,Cosmetic,Accessory or Home"
+            android:inputType="textPersonName"
+            android:text="@={ProductViewModel.strCategory}"
+            android:textSize="14dp"
+            app:layout_constraintBottom_toTopOf="@+id/addPrice"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/addIntro"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="36dp"
+            android:ems="10"
+            android:gravity="bottom|center"
+            android:hint="Short Intro"
+            android:inputType="textPersonName"
+            android:text="@={ProductViewModel.strShortIntro}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/addName" />
+
+
+    </android.support.constraint.ConstraintLayout>
 </layout>

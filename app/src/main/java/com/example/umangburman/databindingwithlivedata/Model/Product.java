@@ -1,17 +1,51 @@
 package com.example.umangburman.databindingwithlivedata.Model;
 
+import com.google.firebase.database.ServerValue;
+
+import java.util.Date;
+
 public class Product {
     private String strProductId;
     private String strProductName;
     private String strShortIntro;
+    private String strCategory;
+    private String price;
+    private String time;
 
     public Product() {
     }
 
-    public Product(String strProductId, String strProductName, String strShortIntro) {
+    public Product(String strProductId, String strProductName, String strShortIntro, String strCategory, String price, String time) {
         this.strProductId = strProductId;
         this.strProductName = strProductName;
         this.strShortIntro = strShortIntro;
+        this.strCategory = strCategory;
+        this.price = price;
+        this.time = time;
+    }
+
+    public String getStrCategory() {
+        return strCategory;
+    }
+
+    public void setStrCategory(String strCategory) {
+        this.strCategory = strCategory;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public String getStrProductId() {
@@ -38,4 +72,24 @@ public class Product {
         this.strShortIntro = strShortIntro;
     }
 
+    public boolean validate(){
+        return getstrProductName() == null || getstrShortIntro() == null
+                || getStrCategory() == null || getPrice() == null;
+    }
+    public boolean validateCategory(){
+
+        boolean _tf = false;
+
+        if(!validate()) {
+            if( getStrCategory().equals("Electronics")
+                    || getStrCategory().equals("Cosmetic")
+                    || getStrCategory().equals("Accessory")
+                    || getStrCategory().equals("Home")){
+                _tf=true;
+            }
+
+        }
+        return _tf;
+
+    }
 }
