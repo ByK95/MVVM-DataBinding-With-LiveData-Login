@@ -2,6 +2,7 @@ package com.example.umangburman.databindingwithlivedata.View;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -40,6 +41,9 @@ public class ProductAddActivity extends AppCompatActivity {
                     if(product.validateCategory()){
                         if(productViewModel.is_created()){
 
+                            Intent intent = new Intent(ProductAddActivity.this,ProductListActivity.class);
+                            startActivity(intent);
+                            finish();
                         }
                     }else {
                         binding.addCategory.setError("Not Correct Category");

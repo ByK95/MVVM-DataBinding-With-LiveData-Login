@@ -49,6 +49,7 @@ public class LoginViewModel extends ViewModel {
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     set_auth(false);
+                    System.out.println(e.getLocalizedMessage().toString());
                 }
             });
         }
@@ -68,6 +69,7 @@ public class LoginViewModel extends ViewModel {
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     set_auth(false);
+                    System.out.println(e.getLocalizedMessage().toString());
                 }
             });
         }

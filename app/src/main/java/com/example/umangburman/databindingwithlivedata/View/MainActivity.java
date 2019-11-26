@@ -13,13 +13,15 @@ import com.example.umangburman.databindingwithlivedata.Model.LoginUser;
 import com.example.umangburman.databindingwithlivedata.R;
 import com.example.umangburman.databindingwithlivedata.ViewModel.LoginViewModel;
 import com.example.umangburman.databindingwithlivedata.databinding.ActivityMainBinding;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
-
+    private FirebaseAuth firebaseAuth;
     private ActivityMainBinding binding;
 
 
@@ -27,6 +29,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        firebaseAuth = FirebaseAuth.getInstance();
+
+        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+        if(firebaseUser != null){
+            Intent intent = new Intent(MainActivity.this,ProductListActivity.class);
+            startActivity(intent);
+            finish();
+        }
 
         loginViewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
         loginViewModel.initFirebase();
@@ -57,15 +67,13 @@ public class MainActivity extends AppCompatActivity {
                     binding.txtPassword.setError("Enter at least 6 Digit password");
                     binding.txtPassword.requestFocus();
                 }
-                else {
-
-                    if(loginViewModel.is_auth()) {
-                        Intent ıntent = new Intent(MainActivity.this, ProductAddActivity.class);
-                        startActivity(ıntent);
+                else if(loginViewModel.is_auth()) {
+                        Intent intent = new Intent(MainActivity.this, ProductListActivity.class);
+                        startActivity(intent);
                         finish();
                     }
 
-                }
+
 
             }
         });
