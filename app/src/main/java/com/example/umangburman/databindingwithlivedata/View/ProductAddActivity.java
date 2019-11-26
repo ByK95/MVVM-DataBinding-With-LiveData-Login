@@ -6,20 +6,16 @@ import android.databinding.DataBindingUtil;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.example.umangburman.databindingwithlivedata.Model.Product;
 import com.example.umangburman.databindingwithlivedata.R;
 import com.example.umangburman.databindingwithlivedata.ViewModel.ProductViewModel;
-import com.example.umangburman.databindingwithlivedata.databinding.ActivityProductListBinding;
+import com.example.umangburman.databindingwithlivedata.databinding.ActivityProductAddBinding;
 
-import java.util.ArrayList;
-import java.util.Objects;
+public class ProductAddActivity extends AppCompatActivity {
 
-public class ProductListActivity extends AppCompatActivity {
-
-    private ActivityProductListBinding binding;
+    private ActivityProductAddBinding binding;
     private ProductViewModel productViewModel;
 
     @Override
@@ -28,7 +24,7 @@ public class ProductListActivity extends AppCompatActivity {
 
         productViewModel = ViewModelProviders.of(this).get(ProductViewModel.class);
         productViewModel.initFirebase();
-        binding = DataBindingUtil.setContentView(ProductListActivity.this, R.layout.activity_product_list);
+        binding = DataBindingUtil.setContentView(ProductAddActivity.this, R.layout.activity_product_add);
 
         binding.setLifecycleOwner(this);
         binding.setProductViewModel(productViewModel);
@@ -39,19 +35,16 @@ public class ProductListActivity extends AppCompatActivity {
 
                 if(product.validate()){
 
-                    Toast.makeText(ProductListActivity.this,"Please fill in the Blanks",Toast.LENGTH_LONG).show();
+                    Toast.makeText(ProductAddActivity.this,"Please fill in the Blanks",Toast.LENGTH_LONG).show();
                 }else{
-                    if(product.getStrCategory().equals("Electronics")
-                            || product.getStrCategory().equals("Cosmetic")
-                            || product.getStrCategory().equals("Accessory")
-                            || product.getStrCategory().equals("Home")){
+                    if(product.validateCategory()){
+                        if(productViewModel.is_created()){
 
+                        }
                     }else {
                         binding.addCategory.setError("Not Correct Category");
                     }
                 }
-
-
 
             }
         });

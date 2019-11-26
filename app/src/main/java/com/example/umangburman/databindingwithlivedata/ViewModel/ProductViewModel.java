@@ -21,7 +21,7 @@ import java.util.List;
 
 public class ProductViewModel extends ViewModel {
 
-    private MainActivity main;
+    private boolean _created = false;
     private DatabaseReference databaseReferenceItems;
 
     public void initFirebase(){
@@ -60,10 +60,16 @@ public class ProductViewModel extends ViewModel {
        if(!is_valid) {
            if (is_valid_cat) {
                databaseReferenceItems.child(id).setValue(product);
-
+               set_created(true);
            }
        }
     }
 
+    public boolean is_created() {
+        return _created;
+    }
 
+    public void set_created(boolean _created) {
+        this._created = _created;
+    }
 }

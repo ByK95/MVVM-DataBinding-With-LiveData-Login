@@ -13,7 +13,6 @@ import com.example.umangburman.databindingwithlivedata.Model.LoginUser;
 import com.example.umangburman.databindingwithlivedata.R;
 import com.example.umangburman.databindingwithlivedata.ViewModel.LoginViewModel;
 import com.example.umangburman.databindingwithlivedata.databinding.ActivityMainBinding;
-import com.example.umangburman.databindingwithlivedata.View.ProductListActivity;
 
 import java.util.Objects;
 
@@ -59,11 +58,12 @@ public class MainActivity extends AppCompatActivity {
                     binding.txtPassword.requestFocus();
                 }
                 else {
-                    binding.lblEmailAnswer.setText(loginUser.getStrEmailAddress());
-                    binding.lblPasswordAnswer.setText(loginUser.getStrPassword());
 
-                    Intent ıntent = new Intent(MainActivity.this,ProductListActivity.class);
-                    startActivity(ıntent);
+                    if(loginViewModel.is_auth()) {
+                        Intent ıntent = new Intent(MainActivity.this, ProductAddActivity.class);
+                        startActivity(ıntent);
+                        finish();
+                    }
 
                 }
 

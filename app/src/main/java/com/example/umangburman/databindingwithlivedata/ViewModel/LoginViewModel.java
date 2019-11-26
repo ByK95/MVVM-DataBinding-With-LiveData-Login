@@ -13,6 +13,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginViewModel extends ViewModel {
 
+    private boolean _auth;
     private FirebaseAuth firebaseAuth;
 
     public MutableLiveData<String> EmailAddress = new MutableLiveData<>();
@@ -34,6 +35,26 @@ public class LoginViewModel extends ViewModel {
     }
 
     public void onClick(View view) {
+
+        LoginUser loginuser = new LoginUser(EmailAddress.getValue(),Password.getValue());
+        userMutableLiveData.setValue(loginuser);
+        boolean is_valid = !loginuser.validate();
+        if (is_valid){
+            firebaseAuth.signInWithEmailAndPassword(loginuser.getStrEmailAddress(),loginuser.getStrPassword()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                @Override
+                public void onSuccess(AuthResult authResult) {
+                    set_auth(true);
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    set_auth(false);
+                }
+            });
+        }
+    }
+    public void signUpClick(View view) {
+
         LoginUser loginuser = new LoginUser(EmailAddress.getValue(),Password.getValue());
         userMutableLiveData.setValue(loginuser);
         boolean is_valid = !loginuser.validate();
@@ -41,15 +62,22 @@ public class LoginViewModel extends ViewModel {
             firebaseAuth.createUserWithEmailAndPassword(loginuser.getStrEmailAddress(),loginuser.getStrPassword()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                 @Override
                 public void onSuccess(AuthResult authResult) {
-
+                    set_auth(true);
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-
+                    set_auth(false);
                 }
             });
         }
     }
 
+    public boolean is_auth() {
+        return _auth;
+    }
+
+    public void set_auth(boolean _auth) {
+        this._auth = _auth;
+    }
 }
