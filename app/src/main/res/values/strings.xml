@@ -7,4 +7,11 @@
         <item>Cosmetic</item>
         <item>Accessory</item>
     </array>
+    <array name="orderArray">
+        <item>New</item>
+        <item>Min to Max</item>
+        <item>Max to Min</item>
+    </array>
+
+
 </resources>

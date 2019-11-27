@@ -71,8 +71,9 @@ public class ProductViewModel extends ViewModel {
         productMutableLiveData.setValue(product);
         boolean is_valid = product.validate();
         boolean is_valid_cat = product.validateCategory();
+        boolean imageSelected = product.imageSelected();
        if(!is_valid) {
-           if (is_valid_cat) {
+           if (is_valid_cat && imageSelected) {
                databaseReferenceItems.child(id).setValue(product);
 
            }else{

@@ -40,6 +40,7 @@ public class ProductAddActivity extends AppCompatActivity {
     Bitmap selectedImage;
     ImageView imageView;
     Uri imageData;
+    private boolean _imageCreated = false;
     byte[] smallData;
     private FirebaseStorage firebaseStorage;
     private StorageReference storageReference;
@@ -71,12 +72,14 @@ public class ProductAddActivity extends AppCompatActivity {
 
                     Toast.makeText(ProductAddActivity.this,"Please fill in the Blanks",Toast.LENGTH_LONG).show();
                 }else if(product.validateCategory()){
-                        if(productViewModel.is_created()){
+                        if(productViewModel.is_created() && is_imageCreated()){
 
                             Toast.makeText(ProductAddActivity.this,"Product Added",Toast.LENGTH_LONG).show();
                             Intent intent = new Intent(ProductAddActivity.this,ProductListActivity.class);
                             startActivity(intent);
                             finish();
+                        }else{
+                            Toast.makeText(ProductAddActivity.this,"Please Select a Image",Toast.LENGTH_LONG).show();
                         }
                 }
                 else {
@@ -147,6 +150,7 @@ public class ProductAddActivity extends AppCompatActivity {
                                     public void onSuccess(Uri uri) {
 
                                         productViewModel.setUrl(uri.toString());
+                                        set_imageCreated(true);
                                     }
                                 });
 
@@ -187,4 +191,11 @@ public class ProductAddActivity extends AppCompatActivity {
         return Bitmap.createScaledBitmap(image,width,height,true);
     }
 
+    public boolean is_imageCreated() {
+        return _imageCreated;
+    }
+
+    public void set_imageCreated(boolean _imageCreated) {
+        this._imageCreated = _imageCreated;
+    }
 }

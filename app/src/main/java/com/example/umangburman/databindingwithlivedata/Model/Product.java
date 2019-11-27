@@ -102,4 +102,8 @@ public class Product {
         return _tf;
 
     }
+    public boolean imageSelected(){
+
+        return getStrItemImageUrl() != null;
+    }
 }
