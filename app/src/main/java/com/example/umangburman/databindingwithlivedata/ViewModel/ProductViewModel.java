@@ -3,26 +3,25 @@ package com.example.umangburman.databindingwithlivedata.ViewModel;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.view.View;
-import android.widget.Spinner;
 
-import com.example.umangburman.databindingwithlivedata.Model.LoginUser;
 import com.example.umangburman.databindingwithlivedata.Model.Product;
-import com.example.umangburman.databindingwithlivedata.View.MainActivity;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ServerValue;
 
 import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
 
 public class ProductViewModel extends ViewModel {
 
-    private boolean _created = false;
+    private boolean _created = true;
     private DatabaseReference databaseReferenceItems;
+
+    public boolean is_created() {
+        return _created;
+    }
+
+    private void set_created() {
+        this._created = false;
+    }
 
     public void initFirebase(){
         databaseReferenceItems = FirebaseDatabase.getInstance().getReference("items");
@@ -56,20 +55,13 @@ public class ProductViewModel extends ViewModel {
         productMutableLiveData.setValue(product);
         boolean is_valid = product.validate();
         boolean is_valid_cat = product.validateCategory();
-     //   boolean cat_valid = product.validateCategory();
        if(!is_valid) {
            if (is_valid_cat) {
                databaseReferenceItems.child(id).setValue(product);
-               set_created(true);
+
+           }else{
+               set_created();
            }
        }
-    }
-
-    public boolean is_created() {
-        return _created;
-    }
-
-    public void set_created(boolean _created) {
-        this._created = _created;
     }
 }

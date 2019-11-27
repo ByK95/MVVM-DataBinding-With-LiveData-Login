@@ -59,19 +59,17 @@ public class ProductAddActivity extends AppCompatActivity {
                 if(product.validate()){
 
                     Toast.makeText(ProductAddActivity.this,"Please fill in the Blanks",Toast.LENGTH_LONG).show();
-                }else{
-                    if(product.validateCategory()){
+                }else if(product.validateCategory()){
                         if(productViewModel.is_created()){
-
+                            Toast.makeText(ProductAddActivity.this,"Product Added",Toast.LENGTH_LONG).show();
                             Intent intent = new Intent(ProductAddActivity.this,ProductListActivity.class);
                             startActivity(intent);
                             finish();
                         }
-                    }else {
+                }
+                else {
                         binding.addCategory.setError("Not Correct Category");
                     }
-                }
-
             }
         });
     }

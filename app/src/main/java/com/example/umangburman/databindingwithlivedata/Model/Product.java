@@ -73,8 +73,8 @@ public class Product {
     }
 
     public boolean validate(){
-        return getstrProductName() == null || getstrShortIntro() == null
-                || getStrCategory() == null || getPrice() == null;
+        return getstrProductName()== null || getstrShortIntro() == null
+                || getStrCategory() == null|| getPrice() == null;
     }
     public boolean validateCategory(){
 
