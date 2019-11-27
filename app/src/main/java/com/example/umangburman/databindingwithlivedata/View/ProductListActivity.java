@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.umangburman.databindingwithlivedata.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -48,4 +49,5 @@ public class ProductListActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
     }
+
 }

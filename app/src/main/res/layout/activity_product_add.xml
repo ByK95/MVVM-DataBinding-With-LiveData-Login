@@ -19,7 +19,7 @@
             android:id="@+id/addName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="140dp"
+            android:layout_marginTop="240dp"
             android:ems="10"
             android:gravity="center"
             android:hint="Product Name"
@@ -27,14 +27,15 @@
             android:orientation="vertical"
             android:text="@={ProductViewModel.strProductName}"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="20dp"
             android:gravity="center"
             android:text="Add Product"
             android:textColor="@android:color/black"
@@ -55,19 +56,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.508"
             app:layout_constraintStart_toStartOf="parent" />
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="114dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="79dp"
-            android:layout_marginBottom="22dp"
-            android:clickable="true"
-            app:layout_constraintBottom_toTopOf="@+id/addName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@android:drawable/star_on" />
 
         <EditText
             android:id="@+id/addPrice"
@@ -103,15 +91,29 @@
             android:id="@+id/addIntro"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="36dp"
             android:ems="10"
             android:gravity="bottom|center"
             android:hint="Short Intro"
             android:inputType="textPersonName"
             android:text="@={ProductViewModel.strShortIntro}"
+            app:layout_constraintBottom_toTopOf="@+id/addCategory"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/addName" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:clickable="true"
+            android:onClick="selectImage"
+            app:layout_constraintBottom_toTopOf="@+id/addName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            app:srcCompat="@drawable/selectimage"
+            android:focusable="true" />
 
 
     </android.support.constraint.ConstraintLayout>
