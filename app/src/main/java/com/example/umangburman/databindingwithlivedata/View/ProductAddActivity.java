@@ -25,6 +25,12 @@ import com.example.umangburman.databindingwithlivedata.Model.Product;
 import com.example.umangburman.databindingwithlivedata.R;
 import com.example.umangburman.databindingwithlivedata.ViewModel.ProductViewModel;
 import com.example.umangburman.databindingwithlivedata.databinding.ActivityProductAddBinding;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -33,6 +39,9 @@ public class ProductAddActivity extends AppCompatActivity {
 
     Bitmap selectedImage;
     ImageView imageView;
+    Uri imageData;
+    private FirebaseStorage firebaseStorage;
+    private StorageReference storageReference;
 
     private ActivityProductAddBinding binding;
     private ProductViewModel productViewModel;
@@ -41,7 +50,8 @@ public class ProductAddActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
+        firebaseStorage = FirebaseStorage.getInstance();
+        storageReference = firebaseStorage.getReference();
 
         productViewModel = ViewModelProviders.of(this).get(ProductViewModel.class);
         productViewModel.initFirebase();
@@ -56,6 +66,20 @@ public class ProductAddActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable Product product) {
 
+                if (imageData != null) {
+
+                    storageReference.child("images").child("abc").putFile(imageData).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(ProductAddActivity.this,e.getLocalizedMessage().toString(),Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
                 if(product.validate()){
 
                     Toast.makeText(ProductAddActivity.this,"Please fill in the Blanks",Toast.LENGTH_LONG).show();
@@ -75,7 +99,7 @@ public class ProductAddActivity extends AppCompatActivity {
     }
 
     public void selectImage(View view){
-
+    //for permissions
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},1);
         }else{
@@ -83,7 +107,7 @@ public class ProductAddActivity extends AppCompatActivity {
             startActivityForResult(intenToGalery,2);
         }
     }
-
+    //for permissions
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
 
@@ -95,13 +119,13 @@ public class ProductAddActivity extends AppCompatActivity {
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
-
+    //after permissions
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 
         if(requestCode == 2 && resultCode == RESULT_OK && data != null){
 
-            Uri imageData = data.getData();
+            imageData = data.getData();
             try {
                 if(Build.VERSION.SDK_INT >= 28){
                     ImageDecoder.Source source = ImageDecoder.createSource(this.getContentResolver(),imageData);
