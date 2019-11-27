@@ -9,17 +9,19 @@ public class Product {
     private String strProductName;
     private String strShortIntro;
     private String strCategory;
+    private String strItemImageUrl;
     private String price;
     private String time;
 
     public Product() {
     }
 
-    public Product(String strProductId, String strProductName, String strShortIntro, String strCategory, String price, String time) {
+    public Product(String strProductId, String strProductName, String strShortIntro, String strCategory, String strItemImageUrl, String price, String time) {
         this.strProductId = strProductId;
         this.strProductName = strProductName;
         this.strShortIntro = strShortIntro;
         this.strCategory = strCategory;
+        this.strItemImageUrl = strItemImageUrl;
         this.price = price;
         this.time = time;
     }
@@ -70,6 +72,14 @@ public class Product {
 
     public void setstrShortIntro(String strShortIntro) {
         this.strShortIntro = strShortIntro;
+    }
+
+    public String getStrItemImageUrl() {
+        return strItemImageUrl;
+    }
+
+    public void setStrItemImageUrl(String strItemImageUrl) {
+        this.strItemImageUrl = strItemImageUrl;
     }
 
     public boolean validate(){

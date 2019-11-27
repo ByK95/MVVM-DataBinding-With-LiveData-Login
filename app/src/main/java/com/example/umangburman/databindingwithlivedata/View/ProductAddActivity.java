@@ -27,19 +27,20 @@ import com.example.umangburman.databindingwithlivedata.ViewModel.ProductViewMode
 import com.example.umangburman.databindingwithlivedata.databinding.ActivityProductAddBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.Objects;
+import java.util.UUID;
 
 public class ProductAddActivity extends AppCompatActivity {
 
     Bitmap selectedImage;
     ImageView imageView;
     Uri imageData;
+    byte[] smallData;
     private FirebaseStorage firebaseStorage;
     private StorageReference storageReference;
 
@@ -66,25 +67,12 @@ public class ProductAddActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable Product product) {
 
-                if (imageData != null) {
-
-                    storageReference.child("images").child("abc").putFile(imageData).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(ProductAddActivity.this,e.getLocalizedMessage().toString(),Toast.LENGTH_LONG).show();
-                        }
-                    });
-                }
                 if(product.validate()){
 
                     Toast.makeText(ProductAddActivity.this,"Please fill in the Blanks",Toast.LENGTH_LONG).show();
                 }else if(product.validateCategory()){
                         if(productViewModel.is_created()){
+
                             Toast.makeText(ProductAddActivity.this,"Product Added",Toast.LENGTH_LONG).show();
                             Intent intent = new Intent(ProductAddActivity.this,ProductListActivity.class);
                             startActivity(intent);
@@ -100,7 +88,7 @@ public class ProductAddActivity extends AppCompatActivity {
 
     public void selectImage(View view){
     //for permissions
-        if(ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE ) != PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},1);
         }else{
             Intent intenToGalery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -131,9 +119,45 @@ public class ProductAddActivity extends AppCompatActivity {
                     ImageDecoder.Source source = ImageDecoder.createSource(this.getContentResolver(),imageData);
                     selectedImage = ImageDecoder.decodeBitmap(source);
                     imageView.setImageBitmap(selectedImage);
+                    Bitmap smallImage = makeSmallerImage(selectedImage,300);
+                    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                    smallImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+                    smallData = bytes.toByteArray();
+
                 }else{
                     selectedImage = MediaStore.Images.Media.getBitmap(this.getContentResolver(),imageData);
                     imageView.setImageBitmap(selectedImage);
+                    Bitmap smallImage = makeSmallerImage(selectedImage,300);
+                    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                    smallImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+                    smallData = bytes.toByteArray();
+
+                    if (imageData != null) {
+
+                        UUID uuid = UUID.randomUUID();
+                        final String imageName = "images/" +uuid + ".jpg";
+
+                        storageReference.child(imageName).putBytes(smallData).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                                StorageReference newReference = FirebaseStorage.getInstance().getReference(imageName);
+                                newReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                    @Override
+                                    public void onSuccess(Uri uri) {
+
+                                        productViewModel.setUrl(uri.toString());
+                                    }
+                                });
+
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(ProductAddActivity.this,e.getLocalizedMessage().toString(),Toast.LENGTH_LONG).show();
+                            }
+                        });
+                    }
                 }
 
 
@@ -145,4 +169,22 @@ public class ProductAddActivity extends AppCompatActivity {
 
         super.onActivityResult(requestCode, resultCode, data);
     }
+    public Bitmap makeSmallerImage(Bitmap image, int maximumSize) {
+
+        int width = image.getWidth();
+        int height = image.getHeight();
+
+        float bitmapRatio = (float) width / (float) height;
+
+        if (bitmapRatio > 1) {
+            width = maximumSize;
+            height = (int) (width / bitmapRatio);
+        } else {
+            height = maximumSize;
+            width = (int) (height * bitmapRatio);
+        }
+
+        return Bitmap.createScaledBitmap(image,width,height,true);
+    }
+
 }
