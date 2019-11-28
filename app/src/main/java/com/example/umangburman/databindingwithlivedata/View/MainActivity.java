@@ -24,8 +24,6 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private ActivityMainBinding binding;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
-
         loginViewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
         loginViewModel.initFirebase();
 

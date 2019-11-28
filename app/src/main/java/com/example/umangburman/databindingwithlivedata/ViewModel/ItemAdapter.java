@@ -36,14 +36,14 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemHolder> {
     @Override
     public void onBindViewHolder(@NonNull ItemHolder itemHolder, int i) {
 
-        itemHolder.nameText.setText("");
-        itemHolder.priceText.setText("");
+        itemHolder.nameText.setText(itemNameList.get(i));
+        itemHolder.priceText.setText(itemPriceList.get(i) + " ₺");
 
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return itemNameList.size();
     }
 
     class ItemHolder extends RecyclerView.ViewHolder{
