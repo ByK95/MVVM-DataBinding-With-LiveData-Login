@@ -10,10 +10,12 @@ import android.view.View;
 
 import com.example.umangburman.databindingwithlivedata.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class ProductListActivity extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
+    private FirebaseDatabase firebaseDatabase;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -48,6 +50,7 @@ public class ProductListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_product_list);
 
         firebaseAuth = FirebaseAuth.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
     }
 
 }
