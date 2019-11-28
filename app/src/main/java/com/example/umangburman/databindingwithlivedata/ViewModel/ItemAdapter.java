@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.umangburman.databindingwithlivedata.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -38,6 +39,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemHolder> {
 
         itemHolder.nameText.setText(itemNameList.get(i));
         itemHolder.priceText.setText(itemPriceList.get(i) + " ₺");
+        Picasso.get().load(itemImageList.get(i)).into(itemHolder.imageView);
 
     }
 

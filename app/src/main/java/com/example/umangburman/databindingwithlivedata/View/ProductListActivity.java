@@ -67,13 +67,7 @@ public class ProductListActivity extends AppCompatActivity {
 
         itemNameFromFB = new ArrayList<>();
         itemPriceFromFB = new ArrayList<>();
-
-
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
+        itemImageFromFB = new ArrayList<>();
         getData();
         firebaseAuth = FirebaseAuth.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference();
@@ -82,7 +76,10 @@ public class ProductListActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         itemAdapter = new ItemAdapter(itemNameFromFB,itemPriceFromFB,itemImageFromFB);
         recyclerView.setAdapter(itemAdapter);
+
+
     }
+
 
     public void getData(){
         databaseReference = FirebaseDatabase.getInstance().getReference("items");
@@ -95,9 +92,11 @@ public class ProductListActivity extends AppCompatActivity {
                     if(data != null){
                         String itemName = (String) data.get("strProductName");
                         String itemPrice = (String) data.get("price");
+                        String itemImage = (String) data.get("strItemImageUrl");
 
                         itemNameFromFB.add(itemName);
                         itemPriceFromFB.add(itemPrice);
+                        itemImageFromFB.add(itemImage);
 
                         itemAdapter.notifyDataSetChanged();
 
