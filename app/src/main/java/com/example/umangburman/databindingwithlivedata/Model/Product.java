@@ -86,6 +86,7 @@ public class Product {
         return getstrProductName()== null || getstrShortIntro() == null
                 || getStrCategory() == null|| getPrice() == null;
     }
+
     public boolean validateCategory(){
 
         boolean _tf = false;
@@ -97,11 +98,10 @@ public class Product {
                     || getStrCategory().equals("Home")){
                 _tf=true;
             }
-
         }
         return _tf;
-
     }
+
     public boolean imageSelected(){
 
         return getStrItemImageUrl() != null;

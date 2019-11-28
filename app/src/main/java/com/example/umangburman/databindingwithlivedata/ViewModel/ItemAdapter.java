@@ -1,8 +1,5 @@
 package com.example.umangburman.databindingwithlivedata.ViewModel;
 
-import android.app.Application;
-import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,9 +10,6 @@ import android.widget.TextView;
 
 import com.example.umangburman.databindingwithlivedata.Interface.ItemClickListener;
 import com.example.umangburman.databindingwithlivedata.R;
-import com.example.umangburman.databindingwithlivedata.View.DetailActivity;
-import com.example.umangburman.databindingwithlivedata.View.MainActivity;
-import com.example.umangburman.databindingwithlivedata.View.ProductListActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -48,7 +42,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemHolder> {
         itemHolder.nameText.setText(itemNameList.get(i));
         itemHolder.priceText.setText(itemPriceList.get(i) + " ₺");
         Picasso.get().load(itemImageList.get(i)).into(itemHolder.imageView);
-
     }
 
     @Override
@@ -57,7 +50,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemHolder> {
     }
 
     class ItemHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-
 
         ImageView imageView;
         TextView nameText;
@@ -71,7 +63,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemHolder> {
             nameText = itemView.findViewById(R.id.itemName);
             priceText = itemView.findViewById(R.id.itemPrice);
         }
-
         @Override
         public void onClick(View view) {
             if (clickListener != null) clickListener.onClick(view, getAdapterPosition());

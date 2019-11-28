@@ -31,7 +31,6 @@ public class LoginViewModel extends ViewModel {
             userMutableLiveData = new MutableLiveData<>();
         }
         return userMutableLiveData;
-
     }
 
     public void onClick(View view) {

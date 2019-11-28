@@ -5,7 +5,6 @@ import android.arch.lifecycle.ViewModel;
 import android.view.View;
 
 import com.example.umangburman.databindingwithlivedata.Model.Product;
-import com.example.umangburman.databindingwithlivedata.View.MainActivity;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -39,8 +38,6 @@ public class ProductViewModel extends ViewModel {
 
     public void initFirebase(){
         databaseReferenceItems = FirebaseDatabase.getInstance().getReference("items");
-
-
     }
 
     public MutableLiveData<String> strProductName = new MutableLiveData<>();
@@ -50,7 +47,6 @@ public class ProductViewModel extends ViewModel {
 
 
     private MutableLiveData<Product> productMutableLiveData;
-
 
     public MutableLiveData<Product> getProduct() {
 
@@ -62,7 +58,6 @@ public class ProductViewModel extends ViewModel {
     }
 
     public void onClick(View view) {
-
 
         Timestamp timestamp= new Timestamp(System.currentTimeMillis());
         String time = timestamp.toString();

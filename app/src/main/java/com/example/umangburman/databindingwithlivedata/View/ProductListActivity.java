@@ -1,6 +1,5 @@
 package com.example.umangburman.databindingwithlivedata.View;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -13,7 +12,6 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.umangburman.databindingwithlivedata.Interface.ItemClickListener;
-import com.example.umangburman.databindingwithlivedata.Model.Product;
 import com.example.umangburman.databindingwithlivedata.R;
 import com.example.umangburman.databindingwithlivedata.ViewModel.ItemAdapter;
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,7 +26,6 @@ import java.util.Map;
 
 public class ProductListActivity extends AppCompatActivity implements ItemClickListener {
 
-
     public static final String ITEM_ID = "ItemName" ;
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase firebaseDatabase;
@@ -39,8 +36,6 @@ public class ProductListActivity extends AppCompatActivity implements ItemClickL
     private ArrayList<String> itemPriceFromFB;
     private ArrayList<String> itemImageFromFB;
     private ArrayList<String> itemIdFromFB;
-    private Product product;
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -87,10 +82,7 @@ public class ProductListActivity extends AppCompatActivity implements ItemClickL
         itemAdapter = new ItemAdapter(itemNameFromFB,itemPriceFromFB,itemImageFromFB);
         itemAdapter.setClickListener(ProductListActivity.this);
         recyclerView.setAdapter(itemAdapter);
-
-
     }
-
 
     public void getData(){
         databaseReference = FirebaseDatabase.getInstance().getReference("items");
@@ -110,22 +102,17 @@ public class ProductListActivity extends AppCompatActivity implements ItemClickL
                         itemImageFromFB.add(itemImage);
                         itemAdapter.notifyDataSetChanged();
                         itemIdFromFB.add(itemId);
-
                     }
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
-
     }
-
     @Override
     public void onClick(View view, int position) {
-
 
         Intent intent = new Intent(getApplicationContext(), DetailActivity.class);
         intent.putExtra(ITEM_ID, itemIdFromFB.get(position));

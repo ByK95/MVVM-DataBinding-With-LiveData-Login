@@ -2,6 +2,7 @@
     <string name="app_name">DataBinding With LiveData</string>
 
     <array name="addressArray">
+        <item>Category</item>
         <item>Electronics</item>
         <item>Home/Life</item>
         <item>Cosmetic</item>

@@ -15,8 +15,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
-
-import java.util.ArrayList;
 import java.util.Map;
 
 public class DetailActivity extends AppCompatActivity {
@@ -26,7 +24,6 @@ public class DetailActivity extends AppCompatActivity {
     private TextView itemName;
     private TextView itemShortIntro;
     private TextView itemPrice;
-
 
     public DetailActivity() {
 
@@ -46,36 +43,21 @@ public class DetailActivity extends AppCompatActivity {
         itemShortIntro = findViewById(R.id.itemIntroText);
         itemPrice = findViewById(R.id.itemPriceText);
         writeDetails();
-
     }
-
     public void writeDetails(){
 
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-
                 Map data = (Map) dataSnapshot.getValue();
                     if(data != null){
-                        String itemNames = (String) data.get("strProductName");
-                        String itemPrices = (String) data.get("price");
-                        String itemImages = (String) data.get("strItemImageUrl");
-                        String itemIntros = (String) data.get("strShortIntro");
-
-                        itemName.setText(itemNames);
-                        itemShortIntro.setText(itemIntros);
-                        itemPrice.setText(itemPrices + " ₺");
-                        Picasso.get().load(itemImages).into(imageView);
-
-
-
-
-
+                        itemName.setText((String) data.get("strProductName"));
+                        itemShortIntro.setText((String) data.get("strShortIntro"));
+                        itemPrice.setText((String) data.get("price")+ " ₺");
+                        Picasso.get().load((String) data.get("strItemImageUrl")).into(imageView);
                 }
-
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
