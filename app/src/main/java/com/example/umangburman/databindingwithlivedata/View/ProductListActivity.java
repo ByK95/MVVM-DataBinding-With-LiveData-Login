@@ -9,7 +9,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 
+import com.example.umangburman.databindingwithlivedata.Interface.ItemClickListener;
+import com.example.umangburman.databindingwithlivedata.Model.Product;
 import com.example.umangburman.databindingwithlivedata.R;
 import com.example.umangburman.databindingwithlivedata.ViewModel.ItemAdapter;
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,8 +25,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class ProductListActivity extends AppCompatActivity {
+public class ProductListActivity extends AppCompatActivity implements ItemClickListener {
 
+    private static final String ITEM_ID = "ItemName" ;
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase firebaseDatabase;
     private ItemAdapter itemAdapter;
@@ -32,6 +36,7 @@ public class ProductListActivity extends AppCompatActivity {
     private ArrayList<String> itemShortIntroFromFB;
     private ArrayList<String> itemPriceFromFB;
     private ArrayList<String> itemImageFromFB;
+    private Product product;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -112,4 +117,13 @@ public class ProductListActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onClick(View view, int position) {
+
+        itemNameFromFB.get(position);
+
+        Intent intent = new Intent(getApplicationContext(), DetailActivity.class);
+        intent.putExtra(ITEM_ID, product.getStrProductId());
+        startActivity(intent);
+    }
 }
