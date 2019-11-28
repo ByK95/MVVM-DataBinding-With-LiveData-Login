@@ -1,5 +1,6 @@
 package com.example.umangburman.databindingwithlivedata.View;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -27,7 +28,8 @@ import java.util.Map;
 
 public class ProductListActivity extends AppCompatActivity implements ItemClickListener {
 
-    private static final String ITEM_ID = "ItemName" ;
+
+    public static final String ITEM_ID = "ItemName" ;
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase firebaseDatabase;
     private ItemAdapter itemAdapter;
@@ -36,7 +38,9 @@ public class ProductListActivity extends AppCompatActivity implements ItemClickL
     private ArrayList<String> itemShortIntroFromFB;
     private ArrayList<String> itemPriceFromFB;
     private ArrayList<String> itemImageFromFB;
+    private ArrayList<String> itemIdFromFB;
     private Product product;
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -73,6 +77,7 @@ public class ProductListActivity extends AppCompatActivity implements ItemClickL
         itemNameFromFB = new ArrayList<>();
         itemPriceFromFB = new ArrayList<>();
         itemImageFromFB = new ArrayList<>();
+        itemIdFromFB = new ArrayList<>();
         getData();
         firebaseAuth = FirebaseAuth.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference();
@@ -80,6 +85,7 @@ public class ProductListActivity extends AppCompatActivity implements ItemClickL
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         itemAdapter = new ItemAdapter(itemNameFromFB,itemPriceFromFB,itemImageFromFB);
+        itemAdapter.setClickListener(ProductListActivity.this);
         recyclerView.setAdapter(itemAdapter);
 
 
@@ -98,12 +104,12 @@ public class ProductListActivity extends AppCompatActivity implements ItemClickL
                         String itemName = (String) data.get("strProductName");
                         String itemPrice = (String) data.get("price");
                         String itemImage = (String) data.get("strItemImageUrl");
-
+                        String itemId = (String) data.get("strProductId");
                         itemNameFromFB.add(itemName);
                         itemPriceFromFB.add(itemPrice);
                         itemImageFromFB.add(itemImage);
-
                         itemAdapter.notifyDataSetChanged();
+                        itemIdFromFB.add(itemId);
 
                     }
                 }
@@ -120,10 +126,9 @@ public class ProductListActivity extends AppCompatActivity implements ItemClickL
     @Override
     public void onClick(View view, int position) {
 
-        itemNameFromFB.get(position);
 
         Intent intent = new Intent(getApplicationContext(), DetailActivity.class);
-        intent.putExtra(ITEM_ID, product.getStrProductId());
+        intent.putExtra(ITEM_ID, itemIdFromFB.get(position));
         startActivity(intent);
     }
 }

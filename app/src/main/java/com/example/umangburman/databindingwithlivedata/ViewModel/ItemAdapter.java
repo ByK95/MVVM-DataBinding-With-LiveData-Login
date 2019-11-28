@@ -1,5 +1,8 @@
 package com.example.umangburman.databindingwithlivedata.ViewModel;
 
+import android.app.Application;
+import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,7 +11,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.umangburman.databindingwithlivedata.Interface.ItemClickListener;
 import com.example.umangburman.databindingwithlivedata.R;
+import com.example.umangburman.databindingwithlivedata.View.DetailActivity;
+import com.example.umangburman.databindingwithlivedata.View.MainActivity;
+import com.example.umangburman.databindingwithlivedata.View.ProductListActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -18,6 +25,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemHolder> {
     private ArrayList<String> itemNameList;
     private ArrayList<String> itemPriceList;
     private ArrayList<String> itemImageList;
+    private ItemClickListener clickListener;
 
     public ItemAdapter(ArrayList<String> itemNameList, ArrayList<String> itemPriceList, ArrayList<String> itemImageList) {
         this.itemNameList = itemNameList;
@@ -48,7 +56,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemHolder> {
         return itemNameList.size();
     }
 
-    class ItemHolder extends RecyclerView.ViewHolder{
+    class ItemHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+
 
         ImageView imageView;
         TextView nameText;
@@ -57,10 +66,19 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemHolder> {
         public ItemHolder(@NonNull View itemView) {
             super(itemView);
 
+            itemView.setOnClickListener(this);
             imageView = itemView.findViewById(R.id.itemView);
             nameText = itemView.findViewById(R.id.itemName);
             priceText = itemView.findViewById(R.id.itemPrice);
         }
+
+        @Override
+        public void onClick(View view) {
+            if (clickListener != null) clickListener.onClick(view, getAdapterPosition());
+        }
+    }
+    public void setClickListener(ItemClickListener itemClickListener) {
+        this.clickListener = itemClickListener;
     }
 
 }

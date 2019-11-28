@@ -6,4 +6,60 @@
     android:layout_height="match_parent"
     tools:context=".View.DetailActivity">
 
+    <ImageView
+        android:id="@+id/imageDetail"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_launcher_foreground" />
+
+    <TextView
+        android:id="@+id/itemNameText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="TextView"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/itemIntroText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageDetail" />
+
+    <TextView
+        android:id="@+id/itemIntroText"
+        android:layout_width="351dp"
+        android:layout_height="120dp"
+        android:layout_marginBottom="200dp"
+        android:gravity="center"
+        android:text="intro"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/itemPriceText"
+        android:layout_width="120dp"
+        android:layout_height="52dp"
+        android:layout_marginEnd="150dp"
+        android:layout_marginBottom="110dp"
+        android:gravity="center"
+        android:text="price"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="131dp"
+        android:layout_height="71dp"
+        android:layout_marginBottom="100dp"
+        android:text="Add to Cart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/itemPriceText" />
 </android.support.constraint.ConstraintLayout>
