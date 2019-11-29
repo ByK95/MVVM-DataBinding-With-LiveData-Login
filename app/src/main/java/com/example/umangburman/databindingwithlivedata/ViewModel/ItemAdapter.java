@@ -17,11 +17,11 @@ import java.util.ArrayList;
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemHolder> {
 
     private ArrayList<String> itemNameList;
-    private ArrayList<String> itemPriceList;
+    private ArrayList<Long> itemPriceList;
     private ArrayList<String> itemImageList;
     private ItemClickListener clickListener;
 
-    public ItemAdapter(ArrayList<String> itemNameList, ArrayList<String> itemPriceList, ArrayList<String> itemImageList) {
+    public ItemAdapter(ArrayList<String> itemNameList, ArrayList<Long> itemPriceList, ArrayList<String> itemImageList) {
         this.itemNameList = itemNameList;
         this.itemPriceList = itemPriceList;
         this.itemImageList = itemImageList;

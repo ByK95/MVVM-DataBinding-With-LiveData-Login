@@ -7,18 +7,22 @@ import android.view.View;
 import com.example.umangburman.databindingwithlivedata.Model.Product;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import java.sql.Timestamp;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ProductViewModel extends ViewModel {
 
     private boolean _created = true;
     private DatabaseReference databaseReferenceItems;
-    private FirebaseStorage firebaseStorage;
-    private StorageReference storageReference;
     private String url;
+
+    public ProductViewModel() {
+    }
+
 
     public String getUrl() {
         return url;
@@ -46,6 +50,7 @@ public class ProductViewModel extends ViewModel {
     public MutableLiveData<String> price = new MutableLiveData<>();
 
 
+
     private MutableLiveData<Product> productMutableLiveData;
 
     public MutableLiveData<Product> getProduct() {
@@ -56,19 +61,22 @@ public class ProductViewModel extends ViewModel {
         return productMutableLiveData;
 
     }
-
+    @SuppressWarnings("unchecked")
     public void onClick(View view) {
 
-        Timestamp timestamp= new Timestamp(System.currentTimeMillis());
-        String time = timestamp.toString();
+        Map map = new HashMap();
+        map.put("timestamp", ServerValue.TIMESTAMP);
+
         String id = databaseReferenceItems.push().getKey();
-        Product product  = new Product(id,strProductName.getValue(),strShortIntro.getValue(),strCategory.getValue(),this.getUrl(),price.getValue(),time);
+
+        Product product  = new Product(id,strProductName.getValue(),strShortIntro.getValue(),strCategory.getValue(),this.getUrl(),Long.parseLong(price.getValue()),(Map<String, String>) map.get("timestamp"));
         productMutableLiveData.setValue(product);
         boolean is_valid = product.validate();
         boolean is_valid_cat = product.validateCategory();
         boolean imageSelected = product.imageSelected();
        if(!is_valid) {
            if (is_valid_cat && imageSelected) {
+
                databaseReferenceItems.child(id).setValue(product);
 
            }else{

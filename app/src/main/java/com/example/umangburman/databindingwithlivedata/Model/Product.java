@@ -1,8 +1,9 @@
 package com.example.umangburman.databindingwithlivedata.Model;
 
-import com.google.firebase.database.ServerValue;
+import android.support.annotation.NonNull;
 
-import java.util.Date;
+import com.google.firebase.database.Exclude;
+import java.util.Map;
 
 public class Product {
     private String strProductId;
@@ -10,69 +11,92 @@ public class Product {
     private String strShortIntro;
     private String strCategory;
     private String strItemImageUrl;
-    private String price;
-    private String time;
+    private Long price;
+    private Map<String, String> timestamp;
 
-    public Product() {
-    }
-
-    public Product(String strProductId, String strProductName, String strShortIntro, String strCategory, String strItemImageUrl, String price, String time) {
+    public Product(String strProductId, String strProductName, String strShortIntro, String strCategory, String strItemImageUrl, Long price, Map<String, String> timestamp) {
         this.strProductId = strProductId;
         this.strProductName = strProductName;
         this.strShortIntro = strShortIntro;
         this.strCategory = strCategory;
         this.strItemImageUrl = strItemImageUrl;
         this.price = price;
-        this.time = time;
+        this.timestamp = timestamp;
     }
+
+    public String getStrProductName() {
+        return strProductName;
+    }
+
+    public void setStrProductName(String strProductName) {
+        this.strProductName = strProductName;
+    }
+
+    public String getStrShortIntro() {
+        return strShortIntro;
+    }
+
+    public void setStrShortIntro(String strShortIntro) {
+        this.strShortIntro = strShortIntro;
+    }
+
+    public Long getPrice() {
+        return price;
+    }
+
+    public void setPrice(Long price) {
+        this.price = price;
+    }
+
+    public Map<String, String> getTimestamp() {
+        return timestamp;
+    }
+
+
+    public void setTimestamp(Map<String, String> timestamp) {
+        this.timestamp = timestamp;
+    }
+
 
     public String getStrCategory() {
         return strCategory;
     }
 
+
     public void setStrCategory(String strCategory) {
         this.strCategory = strCategory;
     }
 
-    public String getPrice() {
-        return price;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
-    }
 
     public String getStrProductId() {
         return strProductId;
     }
 
+
     public void setStrProductId(String strProductId) {
         this.strProductId = strProductId;
     }
 
+    @Exclude
     public String getstrProductName() {
         return strProductName;
     }
 
+    @Exclude
     public String getstrShortIntro() {
         return strShortIntro;
     }
 
+    @Exclude
     public void setstrProductName(String strProductName) {
         this.strProductName = strProductName;
     }
 
+    @Exclude
     public void setstrShortIntro(String strShortIntro) {
         this.strShortIntro = strShortIntro;
     }
+
 
     public String getStrItemImageUrl() {
         return strItemImageUrl;

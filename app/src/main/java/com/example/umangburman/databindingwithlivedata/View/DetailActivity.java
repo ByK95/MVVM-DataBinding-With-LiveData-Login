@@ -54,7 +54,7 @@ public class DetailActivity extends AppCompatActivity {
                     if(data != null){
                         itemName.setText((String) data.get("strProductName"));
                         itemShortIntro.setText((String) data.get("strShortIntro"));
-                        itemPrice.setText((String) data.get("price")+ " ₺");
+                        itemPrice.setText((String) data.get("price").toString()+ " ₺");
                         Picasso.get().load((String) data.get("strItemImageUrl")).into(imageView);
                 }
             }

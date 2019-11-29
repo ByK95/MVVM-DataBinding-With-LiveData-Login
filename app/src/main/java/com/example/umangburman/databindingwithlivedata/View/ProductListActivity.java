@@ -32,8 +32,7 @@ public class ProductListActivity extends AppCompatActivity implements ItemClickL
     private ItemAdapter itemAdapter;
     private DatabaseReference databaseReference;
     private ArrayList<String> itemNameFromFB;
-    private ArrayList<String> itemShortIntroFromFB;
-    private ArrayList<String> itemPriceFromFB;
+    private ArrayList<Long> itemPriceFromFB;
     private ArrayList<String> itemImageFromFB;
     private ArrayList<String> itemIdFromFB;
 
@@ -73,10 +72,10 @@ public class ProductListActivity extends AppCompatActivity implements ItemClickL
         itemPriceFromFB = new ArrayList<>();
         itemImageFromFB = new ArrayList<>();
         itemIdFromFB = new ArrayList<>();
-        getData();
+
         firebaseAuth = FirebaseAuth.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference();
-
+        getData();
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         itemAdapter = new ItemAdapter(itemNameFromFB,itemPriceFromFB,itemImageFromFB);
@@ -89,12 +88,16 @@ public class ProductListActivity extends AppCompatActivity implements ItemClickL
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                itemNameFromFB.clear();
+                itemPriceFromFB.clear();
+                itemImageFromFB.clear();
+                itemIdFromFB.clear();
                 for(DataSnapshot itemSnapshot : dataSnapshot.getChildren()){
 
                     Map data = (Map) itemSnapshot.getValue();
                     if(data != null){
                         String itemName = (String) data.get("strProductName");
-                        String itemPrice = (String) data.get("price");
+                        Long itemPrice = (Long) data.get("price") ;
                         String itemImage = (String) data.get("strItemImageUrl");
                         String itemId = (String) data.get("strProductId");
                         itemNameFromFB.add(itemName);

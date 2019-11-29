@@ -35,7 +35,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.UUID;
 
-public class ProductAddActivity extends AppCompatActivity {
+public class ProductAddActivity extends AppCompatActivity  {
 
     Bitmap selectedImage;
     ImageView imageView;
@@ -61,6 +61,7 @@ public class ProductAddActivity extends AppCompatActivity {
 
         binding.setLifecycleOwner(this);
         binding.setProductViewModel(productViewModel);
+
 
         imageView = findViewById(R.id.imageView);
 
@@ -151,6 +152,7 @@ public class ProductAddActivity extends AppCompatActivity {
 
                                         productViewModel.setUrl(uri.toString());
                                         set_imageCreated(true);
+
                                     }
                                 });
 
@@ -198,4 +200,7 @@ public class ProductAddActivity extends AppCompatActivity {
     public void set_imageCreated(boolean _imageCreated) {
         this._imageCreated = _imageCreated;
     }
+
+
+
 }
