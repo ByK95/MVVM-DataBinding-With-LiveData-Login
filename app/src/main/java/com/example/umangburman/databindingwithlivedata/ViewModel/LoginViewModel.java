@@ -15,6 +15,10 @@ public class LoginViewModel extends ViewModel {
 
     private boolean _auth;
     private FirebaseAuth firebaseAuth;
+    private AuthEventListener mListener;
+    public interface AuthEventListener {
+        void onEvent();
+    }
 
     public MutableLiveData<String> EmailAddress = new MutableLiveData<>();
     public MutableLiveData<String> Password = new MutableLiveData<>();
@@ -74,11 +78,17 @@ public class LoginViewModel extends ViewModel {
         }
     }
 
+    public void setAuthEventListener(AuthEventListener eventListener) {
+        mListener = eventListener;
+    }
+
     public boolean is_auth() {
         return _auth;
     }
 
     public void set_auth(boolean _auth) {
-        this._auth = _auth;
+        if (_auth){
+            mListener.onEvent();
+        }
     }
 }
