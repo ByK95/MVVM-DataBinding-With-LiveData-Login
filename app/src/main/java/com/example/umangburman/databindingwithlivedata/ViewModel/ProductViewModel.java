@@ -77,7 +77,7 @@ public class ProductViewModel extends ViewModel {
        if(!is_valid) {
            if (is_valid_cat && imageSelected) {
 
-               databaseReferenceItems.child(id).setValue(product);
+               databaseReferenceItems.child(strCategory.getValue()).child(id).setValue(product);
 
            }else{
                set_created();
