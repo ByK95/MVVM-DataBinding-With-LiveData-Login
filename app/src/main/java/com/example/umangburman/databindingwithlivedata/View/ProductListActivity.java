@@ -48,6 +48,7 @@ public class ProductListActivity extends AppCompatActivity implements ItemClickL
     private String categorySelect;
     private RecyclerView recyclerView;
     private QueryAdapter queryAdapter;
+    private LinearLayoutManager linearLayoutManager;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -104,12 +105,12 @@ public class ProductListActivity extends AppCompatActivity implements ItemClickL
                 String categori[] = getResources().getStringArray(R.array.addressArray);
                 setCategorySelect(categori[i]);
 
-                Integer a= getSpinnerPosition1();
-                Integer b= getSpinnerPosition2();
-                String cat = getCategorySelect();
-
-                query = queryAdapter.spinnerEvent(a,b,cat);
-                System.out.println(getSpinnerPosition2());
+                query = queryAdapter.spinnerEvent(getSpinnerPosition1(),getSpinnerPosition2(),getCategorySelect());
+                if(queryAdapter.isReverse()) {
+                    linearLayoutManager.setReverseLayout(true);
+                }else {
+                    linearLayoutManager.setReverseLayout(false);
+                }
                 getData();
             }
             @Override
@@ -126,7 +127,12 @@ public class ProductListActivity extends AppCompatActivity implements ItemClickL
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 setSpinnerPosition2(i);
-                queryAdapter.spinnerEvent(getSpinnerPosition1(),getSpinnerPosition2(),getCategorySelect());
+                query = queryAdapter.spinnerEvent(getSpinnerPosition1(),getSpinnerPosition2(),getCategorySelect());
+                if(queryAdapter.isReverse()) {
+                    linearLayoutManager.setReverseLayout(true);
+                }else {
+                    linearLayoutManager.setReverseLayout(false);
+                }
                 getData();
             }
             @Override
@@ -136,9 +142,9 @@ public class ProductListActivity extends AppCompatActivity implements ItemClickL
         });
 
 
-
+        linearLayoutManager = new LinearLayoutManager(this);
         recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(linearLayoutManager);
         itemAdapter = new ItemAdapter(itemNameFromFB,itemPriceFromFB,itemImageFromFB);
         itemAdapter.setClickListener(ProductListActivity.this);
         recyclerView.setAdapter(itemAdapter);
