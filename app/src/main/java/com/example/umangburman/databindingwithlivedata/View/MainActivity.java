@@ -44,6 +44,15 @@ public class MainActivity extends AppCompatActivity {
 
         binding.setLoginViewModel(loginViewModel);
 
+        loginViewModel.setAuthEventListener(new LoginViewModel.AuthEventListener() {
+            @Override
+            public void onEvent() {
+                Intent intent = new Intent(MainActivity.this, ProductListActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
         loginViewModel.getUser().observe(this, new Observer<LoginUser>() {
             @Override
             public void onChanged(@Nullable LoginUser loginUser) {
