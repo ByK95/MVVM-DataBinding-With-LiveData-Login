@@ -64,13 +64,26 @@ public class ProductViewModel extends ViewModel {
     @SuppressWarnings("unchecked")
     public void onClick(View view) {
 
+
         Map map = new HashMap();
         map.put("timestamp", ServerValue.TIMESTAMP);
 
-        String id = databaseReferenceItems.push().getKey();
+        String deneme = ((Map<String, String>) map.get("timestamp")).get("timestamp");
 
-        Product product  = new Product(id,strProductName.getValue(),strShortIntro.getValue(),strCategory.getValue(),this.getUrl(),Long.parseLong(price.getValue()),(Map<String, String>) map.get("timestamp"));
-        productMutableLiveData.setValue(product);
+        String id = databaseReferenceItems.push().getKey();
+        Product product;
+
+
+        try {
+            product  = new Product(id,strProductName.getValue(),strShortIntro.getValue(),strCategory.getValue(),this.getUrl(),Long.parseLong(price.getValue()),(Map<String, String>) map.get("timestamp"));
+
+        }catch (NumberFormatException e){
+            product  = new Product(id,strProductName.getValue(),strShortIntro.getValue(),strCategory.getValue(),this.getUrl(),Long.parseLong("0"), (Map<String, String>) map.get("timestamp"));
+
+        }
+            productMutableLiveData.setValue(product);
+
+
         boolean is_valid = product.validate();
         boolean is_valid_cat = product.validateCategory();
         boolean imageSelected = product.imageSelected();

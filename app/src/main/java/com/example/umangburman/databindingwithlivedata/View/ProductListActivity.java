@@ -16,7 +16,8 @@ import android.widget.Spinner;
 
 import com.example.umangburman.databindingwithlivedata.Interface.ItemClickListener;
 import com.example.umangburman.databindingwithlivedata.R;
-import com.example.umangburman.databindingwithlivedata.ViewModel.ItemAdapter;
+import com.example.umangburman.databindingwithlivedata.adapter.ItemAdapter;
+import com.example.umangburman.databindingwithlivedata.adapter.QueryAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -44,8 +45,9 @@ public class ProductListActivity extends AppCompatActivity implements ItemClickL
     private Spinner spinnerSort;
     private Integer spinnerPosition1 = 0;
     private Integer spinnerPosition2 = 0;
-    private String categorySelect = "items";
+    private String categorySelect;
     private RecyclerView recyclerView;
+    private QueryAdapter queryAdapter;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -84,6 +86,10 @@ public class ProductListActivity extends AppCompatActivity implements ItemClickL
         itemImageFromFB = new ArrayList<>();
         itemIdFromFB = new ArrayList<>();
 
+        queryAdapter = new QueryAdapter();
+        firebaseAuth = FirebaseAuth.getInstance();
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+
         spinnerCategory = findViewById(R.id.spinner);
         spinnerSort = findViewById(R.id.spinner2);
           //Spinner 1
@@ -96,13 +102,14 @@ public class ProductListActivity extends AppCompatActivity implements ItemClickL
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 setSpinnerPosition1(i);
                 String categori[] = getResources().getStringArray(R.array.addressArray);
-                if(i>0){
-                    setCategorySelect(categori[i]);
-                }else
-                {
-                    setCategorySelect("items");
-                }
-                spinnerEvent();
+                setCategorySelect(categori[i]);
+
+                Integer a= getSpinnerPosition1();
+                Integer b= getSpinnerPosition2();
+                String cat = getCategorySelect();
+
+                query = queryAdapter.spinnerEvent(a,b,cat);
+                System.out.println(getSpinnerPosition2());
                 getData();
             }
             @Override
@@ -119,8 +126,8 @@ public class ProductListActivity extends AppCompatActivity implements ItemClickL
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 setSpinnerPosition2(i);
-
-
+                queryAdapter.spinnerEvent(getSpinnerPosition1(),getSpinnerPosition2(),getCategorySelect());
+                getData();
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -129,10 +136,7 @@ public class ProductListActivity extends AppCompatActivity implements ItemClickL
         });
 
 
-        firebaseAuth = FirebaseAuth.getInstance();
-        databaseReference = FirebaseDatabase.getInstance().getReference();
-        spinnerEvent();
-        getData();
+
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         itemAdapter = new ItemAdapter(itemNameFromFB,itemPriceFromFB,itemImageFromFB);
@@ -204,82 +208,4 @@ public class ProductListActivity extends AppCompatActivity implements ItemClickL
         this.categorySelect = categorySelect;
     }
 
-    public void spinnerEvent(){
-        switch (getSpinnerPosition1()){
-            case 0 :
-                switch (getSpinnerPosition2()){
-                    case 0 : query = FirebaseDatabase.getInstance().getReference(getCategorySelect());
-
-                        break;
-                    case 1 :
-
-                        break;
-                    case 2 :
-
-                        break;
-
-                }
-                break;
-            case 1 :
-                switch (getSpinnerPosition2()){
-                    case 0 :
-
-                        break;
-                    case 1 :
-
-                        break;
-                    case 2 :
-
-                        break;
-
-                }
-
-                break;
-            case 2 :
-                switch (getSpinnerPosition2()){
-                    case 0 : query = FirebaseDatabase.getInstance().getReference("items").child(getCategorySelect());
-
-                        break;
-                    case 1 :
-
-                        break;
-                    case 2 :
-
-                        break;
-
-                }
-
-                break;
-            case 3 :
-                switch (getSpinnerPosition2()){
-                    case 0 : query = FirebaseDatabase.getInstance().getReference(getCategorySelect()).child(getCategorySelect());
-
-                        break;
-                    case 1 :
-
-                        break;
-                    case 2 :
-
-                        break;
-
-                }
-
-                break;
-            case 4 :
-                switch (getSpinnerPosition2()){
-                    case 0 :
-
-                        break;
-                    case 1 :
-
-                        break;
-                    case 2 :
-
-                        break;
-
-                }
-
-                break;
-        }
-    }
 }

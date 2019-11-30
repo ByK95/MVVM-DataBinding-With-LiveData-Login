@@ -1,4 +1,4 @@
-package com.example.umangburman.databindingwithlivedata.ViewModel;
+package com.example.umangburman.databindingwithlivedata.adapter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;

@@ -22,6 +22,7 @@ public class Product {
         this.strItemImageUrl = strItemImageUrl;
         this.price = price;
         this.timestamp = timestamp;
+
     }
 
     public String getStrProductName() {
@@ -46,15 +47,6 @@ public class Product {
 
     public void setPrice(Long price) {
         this.price = price;
-    }
-
-    public Map<String, String> getTimestamp() {
-        return timestamp;
-    }
-
-
-    public void setTimestamp(Map<String, String> timestamp) {
-        this.timestamp = timestamp;
     }
 
 

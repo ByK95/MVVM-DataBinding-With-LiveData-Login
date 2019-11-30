@@ -69,7 +69,12 @@ public class ProductAddActivity extends AppCompatActivity  {
             @Override
             public void onChanged(@Nullable Product product) {
 
-                if(product.validate()){
+                if(product.getPrice() == 0){
+                    binding.addPrice.setError("Should be more then zero (0)");
+                    binding.addPrice.requestFocus();
+                }
+                 else if(product.validate()){
+
 
                     Toast.makeText(ProductAddActivity.this,"Please fill in the Blanks",Toast.LENGTH_LONG).show();
                 }else if(product.validateCategory()){
